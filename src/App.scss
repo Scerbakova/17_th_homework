@@ -1,38 +1,97 @@
-.App {
-  text-align: center;
-}
+@import "./src/additional/reset.scss";
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&display=swap");
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  overflow-y: auto;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  width: 100vw;
 }
-
-.App-header {
-  background-color: #282c34;
+.wrapper {
+  font-family: "Square Peg", cursive;
+  font-size: 24px;
+  font-weight: 400;
+  padding: 30px;
+  width: 100%;
+  background-color: rgb(184, 228, 144);
   min-height: 100vh;
+  scrollbar-gutter: stable both-edges;
+}
+#dark.wrapper {
+  background-color: rgb(36, 39, 34);
+}
+.navigation {
+  max-width: fit-content;
+  margin-bottom: 30px;
+}
+.link {
+  margin-left: 10px;
+  text-decoration: none;
+  color: darkcyan;
+  text-shadow: 0px 1px blueviolet;
+  transition: 0.2s;
+}
+.link:hover {
+  color: rgb(255, 127, 244);
+}
+#dark.link:hover {
+  color: rgb(8, 250, 117);
+}
+.link--active {
+  color: rgb(114, 49, 109);
+}
+.title {
+  margin-bottom: 30px;
+}
+#dark .title {
+  color:rgb(255, 127, 244)
+}
+.card__wrapper {
+  margin-bottom: 10px;
+}
+.character__card-body {
+  min-height: 200px;
+}
+.episode__card-body {
+  min-height: 300px;
+}
+.character__row,
+.episode__row {
+  background-color: rgb(221, 236, 154);
+  border-bottom: 1px solid black;
+  box-shadow: 0px 2px 10px black;
+  padding: 10px;
+}
+#dark .episode__row {
+  background-color: rgb(53, 38, 63);
+  color:rgb(8, 250, 117)
+}
+#dark .character__row {
+  background-color: rgb(53, 38, 63);
+  color:rgb(8, 250, 117)
+}
+.character {
+  text-shadow: 0px 1px rgb(189, 199, 96);
+}
+.character__image {
+  display: inline-block;
+}
+
+@media (max-width: 580px) {
+  .origin,
+  .location,
+  .episodes,
+  .url,
+  .characters {
+    display: none;
+  }
+}
+.page404 {
+  height: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  row-gap: 40px;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

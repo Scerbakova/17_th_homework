@@ -1,28 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { createContext, useState } from 'react';
+import {
+  BrowserRouter as Router, Navigate, Route, Routes,
+} from 'react-router-dom';
+import ReactSwitch from 'react-switch';
 import './App.scss';
+import Header from './components/Header/Header';
+import CharacterPage from './Pages/Characters/CharacterPage';
+import CharactersPage from './Pages/Characters/CharactersPage';
+import EpisodePage from './Pages/Episodes/EpisodePage';
+import EpisodesPage from './Pages/Episodes/EpisodesPage';
+import HomePage from './Pages/Home/HomePage';
+import Page404 from './Pages/Page404/Page404';
 
-const App = () => (
-  <div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>
-        Edit
-        {' '}
-        <code>src/App.tsx</code>
-        {' '}
-        and save to reload.
-      </p>
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a>
-    </header>
-  </div>
-);
+export const ThemeContext = createContext(null as any);
 
+const App = () => {
+  const [theme, setTheme] = useState('dark');
+  const toggleTheme = () => {
+    setTheme((current) => (current === 'light' ? 'dark' : 'light'));
+  };
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <div className="wrapper" id={theme}>
+        <div className="container">
+          <Router>
+            <Header />
+            <div className="switch text-center">
+              <ReactSwitch checked={theme === 'dark'} onChange={toggleTheme} />
+            </div>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/characters" element={<CharactersPage />} />
+              <Route path="/characters/:id" element={<CharacterPage />} />
+              <Route path="/episodes" element={<EpisodesPage />} />
+              <Route path="/episodes/:id" element={<EpisodePage />} />
+              <Route path="404" element={<Page404 />} />
+              <Route path="*" element={<Navigate to="/404" />} />
+            </Routes>
+          </Router>
+        </div>
+      </div>
+    </ThemeContext.Provider>
+  );
+};
 export default App;
