@@ -8,7 +8,7 @@ const Header = () => (
       <NavLink className={({ isActive }) => getActiveLinkClassName(isActive)} to="/">Home</NavLink>
       <NavLink className={({ isActive }) => getActiveLinkClassName(isActive)} to="/characters">Characters</NavLink>
       <NavLink className={({ isActive }) => getActiveLinkClassName(isActive)} to="/episodes">Episodes</NavLink>
-      <NavLink className={({ isActive }) => getActiveLinkClassName(isActive)} to="/locationes">Locations</NavLink>
+      <NavLink className={({ isActive }) => getActiveLinkClassName(isActive)} to="/locations">Locations</NavLink>
     </nav>
   </header>
 );

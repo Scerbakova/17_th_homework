@@ -10,6 +10,8 @@ import CharactersPage from './Pages/Characters/CharactersPage';
 import EpisodePage from './Pages/Episodes/EpisodePage';
 import EpisodesPage from './Pages/Episodes/EpisodesPage';
 import HomePage from './Pages/Home/HomePage';
+import LocationPage from './Pages/Locations/LocationPage';
+import LocationsPage from './Pages/Locations/LocationsPage';
 import Page404 from './Pages/Page404/Page404';
 
 export const ThemeContext = createContext(null as any);
@@ -34,10 +36,13 @@ const App = () => {
               <Route path="/characters/:id" element={<CharacterPage />} />
               <Route path="/episodes" element={<EpisodesPage />} />
               <Route path="/episodes/:id" element={<EpisodePage />} />
+              <Route path="/locations" element={<LocationsPage />} />
+              <Route path="/locations/:id" element={<LocationPage />} />
               <Route path="404" element={<Page404 />} />
               <Route path="*" element={<Navigate to="/404" />} />
             </Routes>
           </Router>
+
         </div>
       </div>
     </ThemeContext.Provider>

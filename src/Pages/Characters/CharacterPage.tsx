@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import axios from 'axios';
-import { url } from 'inspector';
 import { Character } from '../../Models/CharacterModel';
 import Loader from '../../components/Loader/Loader';
 

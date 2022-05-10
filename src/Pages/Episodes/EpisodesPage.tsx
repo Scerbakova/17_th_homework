@@ -8,7 +8,7 @@ const EpisodesPage = () => {
   const [errorMessage, setErrorMessage] = useState<string>();
   const navigate = useNavigate();
 
-  const getCharacters = async () => {
+  const getEpisodes = async () => {
     try {
       const response = await axios.get('https://rickandmortyapi.com/api/episode');
       setEpisodes(response.data.results);
@@ -25,17 +25,17 @@ const EpisodesPage = () => {
   };
 
   useEffect(() => {
-    getCharacters().then();
+    getEpisodes().then();
   }, []);
   return (
     <div className="center">
       <div className="row justify-content-center">
         <div className="text-center">
-          <h1 className="title">Episodes</h1>
+          <h1 className="title">Episode</h1>
           <div className="row gx-2 justify-content-center">
             {episodes && episodes.map(({ id, name, episode }) => (
-              <div className="card__wrapper col-xs-2 col-sm-4 col-lg-3">
-                <div key={id} className="card-subtitle text-warning bg-success mb-3">
+              <div key={id} className="card__wrapper col-xs-2 col-sm-4 col-lg-3">
+                <div className="card-subtitle text-warning bg-success mb-3">
                   <div className="card-body episode__card-body row">
                     <h2 className="card-title">{name}</h2>
                     <h3 className="card-subtitle mb-2 text-info">{episode}</h3>

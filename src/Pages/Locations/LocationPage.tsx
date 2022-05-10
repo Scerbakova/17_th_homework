@@ -2,85 +2,85 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import Loader from '../../components/Loader/Loader';
-import { Episode } from '../../Models/EpisodeModel';
+import { Location } from '../../Models/LoactionModel';
 
-const EpisodePage = () => {
-  const [episode, setEpisode] = useState<Episode>();
+const LocationPage = () => {
+  const [location, setLocation] = useState<Location>();
   const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
   const navigate = useNavigate();
-  const getEpisode = async () => {
+  const getLocation = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`https://rickandmortyapi.com/api/episode/${id}`);
-      setEpisode(response.data);
+      const response = await axios.get(`https://rickandmortyapi.com/api/location/${id}`);
+      setLocation(response.data);
     } catch (error) {
-      navigate('/users');
+      navigate('/locations');
     } finally {
       setLoading(false);
     }
   };
   useEffect(() => {
     if (id) {
-      getEpisode().then();
+      getLocation().then();
     }
   }, []);
 
   return (
     <div className="text-center">
-      { episode && (
+      { location && (
       <div>
-        <h1 className="title">Episode</h1>
-
-        <div className="row episode__row">
-          <div className="col">
-            <span className="character">name:</span>
-          </div>
-          <div className="col">
-            {episode.name}
-          </div>
-        </div>
+        <h1 className="title">Location</h1>
 
         <div className="row episode__row">
           <div className="col">
             <span className="character">id:</span>
           </div>
           <div className="col">
-            {episode.id}
+            {location.id}
           </div>
         </div>
 
         <div className="row episode__row">
           <div className="col">
-            <span className="character">air date:</span>
+            <span className="character">name:</span>
           </div>
           <div className="col">
-            {episode.air_date}
+            {location.name}
           </div>
         </div>
 
         <div className="row episode__row">
           <div className="col">
-            <span className="character">episode:</span>
+            <span className="character">type:</span>
           </div>
           <div className="col">
-            {episode.episode}
+            {location.type}
+          </div>
+        </div>
+
+        <div className="row episode__row">
+          <div className="col">
+            <span className="character">dimention:</span>
+          </div>
+          <div className="col">
+            {location.dimension}
           </div>
         </div>
 
         <div className="characters">
           <div className="row episode__row">
             <div className="col">
-              <span className="character">characters:</span>
+              <span className="character">residents:</span>
             </div>
             <div className="col">
-              {episode.characters.map(
-                (character) => (
-                  <div key={character}>
+              {location.residents.map(
+                (resident) => (
+                  <div key={resident}>
                     <a
-                      href={character}
+                      href={resident}
                     >
-                      {character}
+                      {resident}
                     </a>
                   </div>
                 ),
@@ -95,7 +95,7 @@ const EpisodePage = () => {
               <span className="character">url:</span>
             </div>
             <div className="col">
-              <a href={episode.url}>{episode.url}</a>
+              <a href={location.url}>{location.url}</a>
             </div>
           </div>
         </div>
@@ -105,7 +105,7 @@ const EpisodePage = () => {
             <span className="character">created:</span>
           </div>
           <div className="col">
-            {episode.created}
+            {location.created}
           </div>
         </div>
       </div>
@@ -115,4 +115,4 @@ const EpisodePage = () => {
   );
 };
 
-export default EpisodePage;
+export default LocationPage;
