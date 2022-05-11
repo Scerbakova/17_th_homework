@@ -26,14 +26,18 @@ const LocationPage = () => {
     getLocation();
   }, [currentLocation]);
 
+  const prev = Number(currentLocation) - 1;
+  const next = Number(currentLocation) + 1;
+
   return (
     <div className="text-center">
       { location && (
       <div>
         <div className="navigation--inner">
           <button
+            disabled={prev === 0}
             onClick={
-                () => setCurrentLocation(Number(currentLocation) - 1)
+                () => setCurrentLocation(prev)
 }
             className="previous btn btn-primary"
           >
@@ -42,8 +46,9 @@ const LocationPage = () => {
           </button>
           <h1 className="title">Episode</h1>
           <button
+            disabled={next === 127}
             onClick={
-              () => setCurrentLocation(Number(currentLocation) + 1)
+              () => setCurrentLocation(next)
 }
             className="next btn btn-danger"
           >

@@ -26,14 +26,18 @@ const CharacterPage = () => {
     getCharacter();
   }, [currentCharacter]);
 
+  const prev = Number(currentCharacter) - 1;
+  const next = Number(currentCharacter) + 1;
+
   return (
     <div className="text-center">
       {character && (
         <div>
           <div className="navigation--inner">
             <button
+              disabled={prev === 0}
               onClick={
-                () => setCurrentCharacter(Number(currentCharacter) - 1)
+                () => setCurrentCharacter(prev)
 }
               className="previous btn btn-primary"
             >
@@ -42,8 +46,9 @@ const CharacterPage = () => {
             </button>
             <h1 className="title">Character</h1>
             <button
+              disabled={prev === 827}
               onClick={
-              () => setCurrentCharacter(Number(currentCharacter) + 1)
+              () => setCurrentCharacter(next)
 }
               className="next btn btn-danger"
             >

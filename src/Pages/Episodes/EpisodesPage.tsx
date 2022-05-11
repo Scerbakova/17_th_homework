@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../../components/Loader/Loader';
 import { Episode } from '../../Models/EpisodeModel';

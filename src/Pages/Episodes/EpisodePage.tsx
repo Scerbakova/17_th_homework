@@ -22,6 +22,9 @@ const EpisodePage = () => {
     }
   };
 
+  const prev = Number(currentEpisode) - 1;
+  const next = Number(currentEpisode) + 1;
+
   useEffect(() => {
     getEpisode();
   }, [currentEpisode]);
@@ -32,8 +35,9 @@ const EpisodePage = () => {
       <div>
         <div className="navigation--inner">
           <button
+            disabled={prev === 0}
             onClick={
-                () => setCurrentEpisode(Number(currentEpisode) - 1)
+                () => setCurrentEpisode(prev)
 }
             className="previous btn btn-primary"
           >
@@ -42,8 +46,10 @@ const EpisodePage = () => {
           </button>
           <h1 className="title">Episode</h1>
           <button
+            disabled={next === 52}
             onClick={
-              () => setCurrentEpisode(Number(currentEpisode) + 1)
+              () => setCurrentEpisode(next)
+
 }
             className="next btn btn-danger"
           >
