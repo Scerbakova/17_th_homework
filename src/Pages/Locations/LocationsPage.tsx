@@ -1,14 +1,17 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Loader from '../../components/Loader/Loader';
 import { Location } from '../../Models/LoactionModel';
 
 const LocationsPage = () => {
   const [locations, setLocations] = useState<Location[]>();
   const [errorMessage, setErrorMessage] = useState<string>();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const getLocations = async () => {
+    setLoading(true);
     try {
       const response = await axios.get('https://rickandmortyapi.com/api/location');
       setLocations(response.data.results);
@@ -20,7 +23,7 @@ const LocationsPage = () => {
         setErrorMessage('Not Axios Error');
       }
     } finally {
-      console.log('BEIGAS');
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -58,6 +61,7 @@ const LocationsPage = () => {
         ))}
       </div>
       <div>{errorMessage && <span>{errorMessage}</span>}</div>
+      {loading && <Loader />}
     </div>
   );
 };

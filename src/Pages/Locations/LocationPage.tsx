@@ -8,11 +8,12 @@ const LocationPage = () => {
   const [location, setLocation] = useState<Location>();
   const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
+  const [currentLocation, setCurrentLocation] = useState(id && +id);
   const navigate = useNavigate();
   const getLocation = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`https://rickandmortyapi.com/api/location/${id}`);
+      const response = await axios.get(`https://rickandmortyapi.com/api/location/${currentLocation}`);
       setLocation(response.data);
     } catch (error) {
       navigate('/locations');
@@ -20,17 +21,36 @@ const LocationPage = () => {
       setLoading(false);
     }
   };
+
   useEffect(() => {
-    if (id) {
-      getLocation().then();
-    }
-  }, []);
+    getLocation();
+  }, [currentLocation]);
 
   return (
     <div className="text-center">
       { location && (
       <div>
-        <h1 className="title">Location</h1>
+        <div className="navigation--inner">
+          <button
+            onClick={
+                () => setCurrentLocation(Number(currentLocation) - 1)
+}
+            className="previous btn btn-primary"
+          >
+            Previous
+
+          </button>
+          <h1 className="title">Episode</h1>
+          <button
+            onClick={
+              () => setCurrentLocation(Number(currentLocation) + 1)
+}
+            className="next btn btn-danger"
+          >
+            Next
+
+          </button>
+        </div>
 
         <div className="row episode__row">
           <div className="col">

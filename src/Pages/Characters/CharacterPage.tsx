@@ -8,11 +8,12 @@ const CharacterPage = () => {
   const [character, setCharacter] = useState<Character>();
   const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
+  const [currentCharacter, setCurrentCharacter] = useState(id && +id);
   const navigate = useNavigate();
   const getCharacter = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`https://rickandmortyapi.com/api/character/${id}`);
+      const response = await axios.get(`https://rickandmortyapi.com/api/character/${currentCharacter}`);
       setCharacter(response.data);
     } catch (error) {
       navigate('/characters');
@@ -20,16 +21,36 @@ const CharacterPage = () => {
       setLoading(false);
     }
   };
+
   useEffect(() => {
-    if (id) {
-      getCharacter().then();
-    }
-  }, []);
+    getCharacter();
+  }, [currentCharacter]);
+
   return (
     <div className="text-center">
       {character && (
         <div>
-          <h1 className="title">Character</h1>
+          <div className="navigation--inner">
+            <button
+              onClick={
+                () => setCurrentCharacter(Number(currentCharacter) - 1)
+}
+              className="previous btn btn-primary"
+            >
+              Previous
+
+            </button>
+            <h1 className="title">Character</h1>
+            <button
+              onClick={
+              () => setCurrentCharacter(Number(currentCharacter) + 1)
+}
+              className="next btn btn-danger"
+            >
+              Next
+
+            </button>
+          </div>
           <div>
             <div className="row character__row">
               <div className="col">

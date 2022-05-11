@@ -8,11 +8,12 @@ const EpisodePage = () => {
   const [episode, setEpisode] = useState<Episode>();
   const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
+  const [currentEpisode, setCurrentEpisode] = useState(id && +id);
   const navigate = useNavigate();
   const getEpisode = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`https://rickandmortyapi.com/api/episode/${id}`);
+      const response = await axios.get(`https://rickandmortyapi.com/api/episode/${currentEpisode}`);
       setEpisode(response.data);
     } catch (error) {
       navigate('/users');
@@ -20,17 +21,36 @@ const EpisodePage = () => {
       setLoading(false);
     }
   };
+
   useEffect(() => {
-    if (id) {
-      getEpisode().then();
-    }
-  }, []);
+    getEpisode();
+  }, [currentEpisode]);
 
   return (
     <div className="text-center">
       { episode && (
       <div>
-        <h1 className="title">Episode</h1>
+        <div className="navigation--inner">
+          <button
+            onClick={
+                () => setCurrentEpisode(Number(currentEpisode) - 1)
+}
+            className="previous btn btn-primary"
+          >
+            Previous
+
+          </button>
+          <h1 className="title">Episode</h1>
+          <button
+            onClick={
+              () => setCurrentEpisode(Number(currentEpisode) + 1)
+}
+            className="next btn btn-danger"
+          >
+            Next
+
+          </button>
+        </div>
 
         <div className="row episode__row">
           <div className="col">

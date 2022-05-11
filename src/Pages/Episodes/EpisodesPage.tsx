@@ -1,16 +1,22 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Loader from '../../components/Loader/Loader';
 import { Episode } from '../../Models/EpisodeModel';
 
 const EpisodesPage = () => {
   const [episodes, setEpisodes] = useState<Episode[]>();
   const [errorMessage, setErrorMessage] = useState<string>();
   const navigate = useNavigate();
+  const [inputValue, setInputValue] = useState('');
+  const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState<boolean>(false);
 
   const getEpisodes = async () => {
+    setLoading(true);
+    const params = `?name=${inputValue}`;
     try {
-      const response = await axios.get('https://rickandmortyapi.com/api/episode');
+      const response = await axios.get(`https://rickandmortyapi.com/api/episode/${params}`);
       setEpisodes(response.data.results);
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -20,18 +26,43 @@ const EpisodesPage = () => {
         setErrorMessage('Not Axios Error');
       }
     } finally {
-      console.log('BEIGAS');
+      setLoading(false);
     }
   };
-
   useEffect(() => {
     getEpisodes().then();
-  }, []);
+  }, [search]);
+
+  useEffect(() => {
+    setInputValue('');
+  }, [search]);
+
   return (
     <div className="center">
       <div className="row justify-content-center">
         <div className="text-center">
-          <h1 className="title">Episode</h1>
+          <h1 className="title">Episodes</h1>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              setInputValue('');
+            }}
+            className="input__search"
+          >
+            <input
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              type="text"
+              placeholder="Search by name"
+            />
+            <button
+              onClick={() => setSearch(inputValue)}
+              className="btn btn-info"
+            >
+              Search
+
+            </button>
+          </form>
           <div className="row gx-2 justify-content-center">
             {episodes && episodes.map(({ id, name, episode }) => (
               <div key={id} className="card__wrapper col-xs-2 col-sm-4 col-lg-3">
@@ -47,8 +78,8 @@ const EpisodesPage = () => {
                     <div className="col align-self-end">
                       <button
                         onClick={
-                        () => navigate(`/episodes/${id}`)
-}
+                            () => navigate(`/episodes/${id}`)
+                          }
                         className="btn btn-danger"
                       >
                         Read More
@@ -62,9 +93,9 @@ const EpisodesPage = () => {
           </div>
         </div>
       </div>
-      <div>{errorMessage && <span>{ errorMessage }</span>}</div>
+      <div>{errorMessage && <span>{errorMessage}</span>}</div>
+      {loading && <Loader />}
     </div>
   );
 };
-
 export default EpisodesPage;
