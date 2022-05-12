@@ -3,12 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import Loader from '../../components/Loader/Loader';
 import { Location } from '../../Models/LoactionModel';
+import LocationsPage from './LocationsPage';
 
 const LocationPage = () => {
   const [location, setLocation] = useState<Location>();
   const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
-  const [currentLocation, setCurrentLocation] = useState(id && +id);
+  const [currentLocation, setCurrentLocation] = useState<number>(Number(id));
   const navigate = useNavigate();
   const getLocation = async () => {
     setLoading(true);
@@ -37,7 +38,10 @@ const LocationPage = () => {
           <button
             disabled={prev === 0}
             onClick={
-                () => setCurrentLocation(prev)
+              () => {
+                (setCurrentLocation(prev));
+                (navigate(`/locations/${currentLocation - 1}`));
+              }
 }
             className="previous btn btn-primary"
           >
@@ -48,7 +52,10 @@ const LocationPage = () => {
           <button
             disabled={next === 127}
             onClick={
-              () => setCurrentLocation(next)
+              () => {
+                (setCurrentLocation(next));
+                (navigate(`/locations/${currentLocation + 1}`));
+              }
 }
             className="next btn btn-danger"
           >
@@ -103,9 +110,9 @@ const LocationPage = () => {
                 (resident) => (
                   <div key={resident}>
                     <a
-                      href={resident}
+                      href={resident.replace((resident.slice(0, 42)), '/characters/')}
                     >
-                      {resident}
+                      {resident.replace((resident.slice(0, 42)), '/characters/')}
                     </a>
                   </div>
                 ),
@@ -113,14 +120,15 @@ const LocationPage = () => {
             </div>
           </div>
         </div>
-
         <div className="url">
           <div className="row episode__row">
             <div className="col">
               <span className="character">url:</span>
             </div>
             <div className="col">
-              <a href={location.url}>{location.url}</a>
+              <a href={location.url.replace((location.url.slice(0, 41)), '/locations/')}>
+                {location.url.replace((location.url.slice(0, 41)), '/locations/')}
+              </a>
             </div>
           </div>
         </div>
@@ -139,5 +147,4 @@ const LocationPage = () => {
     </div>
   );
 };
-
 export default LocationPage;

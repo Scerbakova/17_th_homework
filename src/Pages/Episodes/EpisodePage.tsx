@@ -8,7 +8,7 @@ const EpisodePage = () => {
   const [episode, setEpisode] = useState<Episode>();
   const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
-  const [currentEpisode, setCurrentEpisode] = useState(id && +id);
+  const [currentEpisode, setCurrentEpisode] = useState<number>(Number(id));
   const navigate = useNavigate();
   const getEpisode = async () => {
     setLoading(true);
@@ -16,7 +16,7 @@ const EpisodePage = () => {
       const response = await axios.get(`https://rickandmortyapi.com/api/episode/${currentEpisode}`);
       setEpisode(response.data);
     } catch (error) {
-      navigate('/users');
+      navigate('/episodes');
     } finally {
       setLoading(false);
     }
@@ -37,7 +37,10 @@ const EpisodePage = () => {
           <button
             disabled={prev === 0}
             onClick={
-                () => setCurrentEpisode(prev)
+              () => {
+                (setCurrentEpisode(prev));
+                (navigate(`/episodes/${currentEpisode - 1}`));
+              }
 }
             className="previous btn btn-primary"
           >
@@ -48,8 +51,10 @@ const EpisodePage = () => {
           <button
             disabled={next === 52}
             onClick={
-              () => setCurrentEpisode(next)
-
+              () => {
+                (setCurrentEpisode(next));
+                (navigate(`/episodes/${currentEpisode + 1}`));
+              }
 }
             className="next btn btn-danger"
           >
@@ -104,9 +109,9 @@ const EpisodePage = () => {
                 (character) => (
                   <div key={character}>
                     <a
-                      href={character}
+                      href={character.replace((character.slice(0, 42)), '/characters/')}
                     >
-                      {character}
+                      {character.replace((character.slice(0, 42)), '/characters/')}
                     </a>
                   </div>
                 ),
@@ -121,7 +126,9 @@ const EpisodePage = () => {
               <span className="character">url:</span>
             </div>
             <div className="col">
-              <a href={episode.url}>{episode.url}</a>
+              <a href={episode.url.replace((episode.url.slice(0, 40)), '/episodes/')}>
+                {episode.url.replace((episode.url.slice(0, 40)), '/episodes/')}
+              </a>
             </div>
           </div>
         </div>

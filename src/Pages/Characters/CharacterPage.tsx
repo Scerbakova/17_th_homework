@@ -8,7 +8,7 @@ const CharacterPage = () => {
   const [character, setCharacter] = useState<Character>();
   const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
-  const [currentCharacter, setCurrentCharacter] = useState(id && +id);
+  const [currentCharacter, setCurrentCharacter] = useState<number>(Number(id));
   const navigate = useNavigate();
   const getCharacter = async () => {
     setLoading(true);
@@ -37,7 +37,10 @@ const CharacterPage = () => {
             <button
               disabled={prev === 0}
               onClick={
-                () => setCurrentCharacter(prev)
+                () => {
+                  (setCurrentCharacter(prev));
+                  (navigate(`/characters/${currentCharacter - 1}`));
+                }
 }
               className="previous btn btn-primary"
             >
@@ -46,9 +49,12 @@ const CharacterPage = () => {
             </button>
             <h1 className="title">Character</h1>
             <button
-              disabled={prev === 827}
+              disabled={next === 827}
               onClick={
-              () => setCurrentCharacter(next)
+                () => {
+                  (setCurrentCharacter(next));
+                  (navigate(`/characters/${currentCharacter + 1}`));
+                }
 }
               className="next btn btn-danger"
             >
@@ -122,7 +128,9 @@ const CharacterPage = () => {
                   {character.origin.name}
                 </div>
                 <div className="origin">
-                  <a href={character.origin.url}>{character.origin.url}</a>
+                  <a href={character.origin.url.replace((character.origin.url.slice(0, 41)), '/locations/')}>
+                    {character.origin.url.replace((character.origin.url.slice(0, 41)), '/locations/')}
+                  </a>
                 </div>
               </div>
             </div>
@@ -136,7 +144,9 @@ const CharacterPage = () => {
                   {character.location.name}
                 </div>
                 <div className="location">
-                  <a href={character.location.url}>{character.location.url}</a>
+                  <a href={character.location.url.replace((character.location.url.slice(0, 41)), '/locations/')}>
+                    {character.location.url.replace((character.location.url.slice(0, 41)), '/locations/')}
+                  </a>
                 </div>
               </div>
             </div>
@@ -156,7 +166,13 @@ const CharacterPage = () => {
                   <span className="character">episodes:</span>
                 </div>
                 <div className="col">
-                  {character.episode.map((link) => <div><a href={link} key={Math.random()}>{link}</a></div>)}
+                  {character.episode.map((link) => (
+                    <div>
+                      <a href={link.replace((link.slice(0, 40)), '/episodes/')} key={Math.random()}>
+                        {link.replace((link.slice(0, 40)), '/episodes/')}
+                      </a>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -167,7 +183,9 @@ const CharacterPage = () => {
                   <span className="character">url:</span>
                 </div>
                 <div className="col">
-                  <a href={character.url}>{character.url}</a>
+                  <a href={character.url.replace((character.url.slice(0, 42)), '/characters/')}>
+                    {character.url.replace((character.url.slice(0, 42)), '/characters/')}
+                  </a>
                 </div>
               </div>
             </div>
