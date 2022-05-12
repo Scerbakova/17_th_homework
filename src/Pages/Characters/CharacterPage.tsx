@@ -134,7 +134,6 @@ const CharacterPage = () => {
                 </div>
               </div>
             </div>
-
             <div className="row character__row">
               <div className="col">
                 <span className="character">location:</span>
@@ -168,7 +167,7 @@ const CharacterPage = () => {
                 <div className="col">
                   {character.episode.map((link) => (
                     <div key={link}>
-                      <a href={link.replace((link.slice(0, 40)), '/episodes/')} key={Math.random()}>
+                      <a href={link.replace((link.slice(0, 40)), '/episodes/')} key={id}>
                         {link.replace((link.slice(0, 40)), '/episodes/')}
                       </a>
                     </div>

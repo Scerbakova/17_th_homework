@@ -21,6 +21,7 @@ const App = () => {
   const toggleTheme = () => {
     setTheme((current) => (current === 'light' ? 'dark' : 'light'));
   };
+
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <div className="wrapper" id={theme}>
@@ -42,7 +43,6 @@ const App = () => {
               <Route path="*" element={<Navigate to="/404" />} />
             </Routes>
           </Router>
-
         </div>
       </div>
     </ThemeContext.Provider>

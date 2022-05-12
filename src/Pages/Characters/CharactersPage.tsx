@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Loader from '../../components/Loader/Loader';
 import { Character } from '../../Models/CharacterModel';
 
@@ -13,13 +13,17 @@ const CaractersPage = () => {
   const [hasMore, setHasMore] = useState(true);
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const getCharacters = async () => {
     setLoading(true);
+
     const params = activeFilter === 'all' ? '' : `?status=${activeFilter}`;
+
     try {
       const response = await axios.get(`https://rickandmortyapi.com/api/character/${params}`);
       setCharacters(response.data.results);
+
       if (response.data.info.next === null) {
         setHasMore(false);
       } else {
@@ -75,10 +79,40 @@ const CaractersPage = () => {
     <div className="text-center">
       <h1 className="title">Characters</h1>
       <div className="buttons">
-        <button onClick={() => setActiveFilter('all')} className="btn btn-primary">All</button>
-        <button onClick={() => setActiveFilter('alive')} className="btn btn-success">Alive</button>
-        <button onClick={() => setActiveFilter('dead')} className="btn btn-danger">Dead</button>
-        <button onClick={() => setActiveFilter('unknown')} className="btn btn-warning">Unknown</button>
+        <button
+          onClick={() => {
+            setActiveFilter('all');
+            setSearchParams({ search: 'all' });
+          }}
+          className="btn btn-primary"
+        >
+          All
+        </button>
+        <button
+          onClick={() => {
+            setActiveFilter('alive');
+            setSearchParams({ search: 'alive' });
+          }}
+          className="btn btn-success"
+        >
+          Alive
+        </button>
+        <button
+          onClick={() => {
+            setActiveFilter('dead'); setSearchParams({ search: 'dead' });
+          }}
+          className="btn btn-danger"
+        >
+          Dead
+        </button>
+        <button
+          onClick={() => {
+            setActiveFilter('unknown'); setSearchParams({ search: 'unknown' });
+          }}
+          className="btn btn-warning"
+        >
+          Unknown
+        </button>
       </div>
       {characters && (
       <InfiniteScroll

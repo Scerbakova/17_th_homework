@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Loader from '../../components/Loader/Loader';
 import { Episode } from '../../Models/EpisodeModel';
+import styles from './EpisodesPage.module.scss';
 
 const EpisodesPage = () => {
   const [episodes, setEpisodes] = useState<Episode[]>();
@@ -14,6 +15,7 @@ const EpisodesPage = () => {
   const [hasMore, setHasMore] = useState(true);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const getEpisodes = async () => {
     setLoading(true);
@@ -139,7 +141,7 @@ const EpisodesPage = () => {
         </div>
       </div>
 
-      <div>{errorMessage && <span>{errorMessage}</span>}</div>
+      <div>{errorMessage && <span className={styles.error}>{errorMessage}</span>}</div>
       {loading && <Loader />}
     </div>
   );
