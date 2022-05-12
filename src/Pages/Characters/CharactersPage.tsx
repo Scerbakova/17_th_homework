@@ -4,7 +4,6 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../../components/Loader/Loader';
 import { Character } from '../../Models/CharacterModel';
-import CharacterPage from './CharacterPage';
 
 const CaractersPage = () => {
   const [characters, setCharacters] = useState<Character[]>();
@@ -14,34 +13,6 @@ const CaractersPage = () => {
   const [hasMore, setHasMore] = useState(true);
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
-
-  // const scrollHandler = () => {
-  //   if (document.documentElement.offsetHeight - (window.innerHeight + document.documentElement.scrollTop) < 100) {
-  //     setAxiosing(true);
-  //   }
-  // };
-
-  // const scrollHandler = useCallback(() => {
-  //   if (
-  //     window.innerHeight
-  //       + Math.max(
-  //         window.pageYOffset,
-  //         document.documentElement.scrollTop,
-  //         document.body.scrollTop,
-  //       )
-  //     > document.documentElement.offsetHeight - 100
-  //   ) {
-  //     setAxiosing(true);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   document.addEventListener('scroll', scrollHandler);
-  //   const scroll = () => {
-  //     document.removeEventListener('scroll', scrollHandler);
-  //     return scroll;
-  //   };
-  // }, []);
 
   const getCharacters = async () => {
     setLoading(true);
@@ -64,7 +35,6 @@ const CaractersPage = () => {
       }
     } finally {
       setLoading(false);
-      // setAxiosing(false);
     }
   };
 

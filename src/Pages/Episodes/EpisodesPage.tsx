@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../../components/Loader/Loader';
 import { Episode } from '../../Models/EpisodeModel';
@@ -9,6 +10,8 @@ const EpisodesPage = () => {
   const [errorMessage, setErrorMessage] = useState<string>();
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState('');
+  const [nextPage, setNextPage] = useState<string>();
+  const [hasMore, setHasMore] = useState(true);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -18,6 +21,12 @@ const EpisodesPage = () => {
     try {
       const response = await axios.get(`https://rickandmortyapi.com/api/episode/${params}`);
       setEpisodes(response.data.results);
+      if (response.data.info.next === null) {
+        setHasMore(false);
+      } else {
+        setNextPage(response.data.info.next);
+        setHasMore(true);
+      }
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const message = error.response?.status === 404 ? 'Nothing to show' : error.message;
@@ -36,6 +45,35 @@ const EpisodesPage = () => {
   useEffect(() => {
     setInputValue('');
   }, [search]);
+
+  const getMoreEpisodes = async () => {
+    setLoading(true);
+    try {
+      if (nextPage) {
+        const response = await axios.get(nextPage);
+        setNextPage(response.data.info.next);
+        const data = response.data.results;
+        return data;
+      }
+      setHasMore(false);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const message = error.response?.status === 404 ? 'Nothing to show' : error.message;
+        setErrorMessage(message);
+      } else {
+        setErrorMessage('Not Axios Error');
+      }
+    } finally {
+      setLoading(false);
+    } return [];
+  };
+
+  const fetchData = async () => {
+    const moreEpisodes = await getMoreEpisodes();
+    if (episodes) {
+      setEpisodes([...episodes, ...moreEpisodes]);
+    }
+  };
 
   return (
     <div className="center">
@@ -63,36 +101,51 @@ const EpisodesPage = () => {
 
             </button>
           </form>
-          <div className="row gx-2 justify-content-center">
-            {episodes && episodes.map(({ id, name, episode }) => (
-              <div key={id} className="card__wrapper col-xs-2 col-sm-4 col-lg-3">
-                <div className="card-subtitle text-warning bg-success mb-3">
-                  <div className="card-body episode__card-body row">
-                    <h2 className="card-title">{name}</h2>
-                    <h3 className="card-subtitle mb-2 text-info">{episode}</h3>
-                    <p className="card-text text-dark">
-                      ID:
-                      {' '}
-                      {id}
-                    </p>
-                    <div className="col align-self-end">
-                      <button
-                        onClick={
+          {episodes && (
+          <InfiniteScroll
+            dataLength={episodes.length}
+            next={fetchData}
+            hasMore={hasMore}
+            loader={<h4>Loading...</h4>}
+            endMessage={(
+              <p style={{ textAlign: 'center' }}>
+                <b>Yay! You have seen it all</b>
+              </p>
+  )}
+          >
+            <div className="row gx-2 justify-content-center">
+              {episodes && episodes.map(({ id, name, episode }) => (
+                <div key={id} className="card__wrapper col-xs-2 col-sm-4 col-lg-3">
+                  <div className="card-subtitle text-warning bg-success mb-3">
+                    <div className="card-body episode__card-body row">
+                      <h2 className="card-title">{name}</h2>
+                      <h3 className="card-subtitle mb-2 text-info">{episode}</h3>
+                      <p className="card-text text-dark">
+                        ID:
+                        {' '}
+                        {id}
+                      </p>
+                      <div className="col align-self-end">
+                        <button
+                          onClick={
                             () => navigate(`/episodes/${id}`)
                           }
-                        className="btn btn-danger"
-                      >
-                        Read More
+                          className="btn btn-danger"
+                        >
+                          Read More
 
-                      </button>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </InfiniteScroll>
+          )}
         </div>
       </div>
+
       <div>{errorMessage && <span>{errorMessage}</span>}</div>
       {loading && <Loader />}
     </div>
