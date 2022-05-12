@@ -38,11 +38,9 @@ const EpisodesPage = () => {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    getEpisodes().then();
-  }, [search]);
 
   useEffect(() => {
+    getEpisodes().then();
     setInputValue('');
   }, [search]);
 
