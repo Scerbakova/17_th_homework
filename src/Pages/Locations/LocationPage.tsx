@@ -48,7 +48,7 @@ const LocationPage = () => {
             Previous
 
           </button>
-          <h1 className="title">Episode</h1>
+          <h1 className="title">Location</h1>
           <button
             disabled={next === 127}
             onClick={
