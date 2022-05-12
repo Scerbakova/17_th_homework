@@ -83,7 +83,7 @@ const LocationsPage = () => {
           {locations && locations.map(({ id, name, type }) => (
             <div key={id} className="card__wrapper col-xs-2 col-sm-4 col-lg-3">
               <div className="card text-dark bg-warning mb-3">
-                <div>{type}</div>
+                <div className="card-text">{type}</div>
                 <div className="card-body location__card-body row">
                   <h3 className="card-title">{name}</h3>
                   <p className="card-text">
