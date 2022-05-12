@@ -86,11 +86,6 @@ const CaractersPage = () => {
         next={fetchData}
         hasMore={hasMore}
         loader={<h4>Loading...</h4>}
-        endMessage={(
-          <p style={{ textAlign: 'center' }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-  )}
       >
         <div className="row gx-2 justify-content-center">
           {characters && characters.map(({

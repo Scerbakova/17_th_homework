@@ -5,7 +5,7 @@
   overflow-y: auto;
 }
 body {
-  width: 100vw;
+  width: 100%;
 }
 .wrapper {
   font-family: "Square Peg", cursive;
@@ -53,7 +53,7 @@ body {
   min-height: 400px;
 }
 .location__card-body {
-  min-height: 500px;
+  min-height: 300px;
 }
 .character__row,
 .episode__row {
@@ -130,4 +130,7 @@ body {
 .previous, .next {
   width: fit-content;
   height: fit-content;
+}
+.infinite-scroll-component {
+  overflow: hidden !important;
 }
