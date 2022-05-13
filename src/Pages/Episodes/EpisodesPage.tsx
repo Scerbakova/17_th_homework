@@ -13,13 +13,14 @@ const EpisodesPage = () => {
   const [inputValue, setInputValue] = useState('');
   const [nextPage, setNextPage] = useState<string>();
   const [hasMore, setHasMore] = useState(true);
-  const [search, setSearch] = useState('');
   const [loading, setLoading] = useState<boolean>(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const getEpisodes = async () => {
     setLoading(true);
+
     const params = `?name=${inputValue}`;
+
     try {
       const response = await axios.get(`https://rickandmortyapi.com/api/episode/${params}`);
       setEpisodes(response.data.results);
@@ -44,7 +45,7 @@ const EpisodesPage = () => {
   useEffect(() => {
     getEpisodes().then();
     setInputValue('');
-  }, [search]);
+  }, []);
 
   const getMoreEpisodes = async () => {
     setLoading(true);
@@ -84,6 +85,8 @@ const EpisodesPage = () => {
             onSubmit={(e) => {
               e.preventDefault();
               setInputValue('');
+              setSearchParams({ search: `${inputValue}` });
+              getEpisodes();
             }}
             className="input__search"
           >
@@ -94,11 +97,9 @@ const EpisodesPage = () => {
               placeholder="Search by name"
             />
             <button
-              onClick={() => setSearch(inputValue)}
               className="btn btn-info"
             >
               Search
-
             </button>
           </form>
           {episodes && (
