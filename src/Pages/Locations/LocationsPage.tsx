@@ -4,6 +4,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../../components/Loader/Loader';
 import { Location } from '../../Models/LoactionModel';
+import LocationCard from '../../components/Cards/LocationCard';
 
 const LocationsPage = () => {
   const [locations, setLocations] = useState<Location[]>();
@@ -81,30 +82,7 @@ const LocationsPage = () => {
       >
         <div className="row gx-2 justify-content-center">
           {locations && locations.map(({ id, name, type }) => (
-            <div key={id} className="card__wrapper col-xs-2 col-sm-4 col-lg-3">
-              <div className="card text-dark bg-warning mb-3">
-                <div className="card-text">{type}</div>
-                <div className="card-body location__card-body row">
-                  <h3 className="card-title">{name}</h3>
-                  <p className="card-text">
-                    ID:
-                    {' '}
-                    {id}
-                  </p>
-                  <div className="col align-self-end">
-                    <button
-                      onClick={
-                        () => navigate(`/locations/${id}`)
-}
-                      className="btn btn-danger"
-                    >
-                      Read More
-
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <LocationCard key={id} id={id} name={name} type={type} />
           ))}
         </div>
       </InfiniteScroll>

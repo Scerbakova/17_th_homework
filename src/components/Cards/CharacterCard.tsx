@@ -1,20 +1,20 @@
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export type CharacterCard = {
+export type CharacterCardProps = {
   id: number,
   name: string,
   image: string,
   status: string,
 }
 
-const Card: FC<CharacterCard> = ({
+const CharacterCard: FC<CharacterCardProps> = ({
   id, name, image, status,
 }) => {
   const navigate = useNavigate();
 
   return (
-    <div key={id} className="card__wrapper col-xs-2 col-sm-4 col-lg-3">
+    <div className="card__wrapper col-xs-2 col-sm-4 col-lg-3">
       <div className={`card text-dark mb-3
                 ${status === 'Alive' ? 'bg-success' : ''}
                 ${status === 'Dead' ? 'bg-danger' : ''}
@@ -37,4 +37,4 @@ const Card: FC<CharacterCard> = ({
   );
 };
 
-export default Card;
+export default CharacterCard;

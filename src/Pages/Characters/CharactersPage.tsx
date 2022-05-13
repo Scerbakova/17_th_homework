@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import Card from '../../components/Card/Card';
+import { useSearchParams } from 'react-router-dom';
+import CharacterCard from '../../components/Cards/CharacterCard';
 import Loader from '../../components/Loader/Loader';
 import { Character } from '../../Models/CharacterModel';
 
@@ -113,6 +113,7 @@ const CaractersPage = () => {
         >
           Unknown
         </button>
+
       </div>
       {characters && (
       <InfiniteScroll
@@ -125,7 +126,8 @@ const CaractersPage = () => {
           {characters && characters.map(({
             id, name, image, status,
           }) => (
-            <Card
+            <CharacterCard
+              key={id}
               id={id}
               name={name}
               image={image}
@@ -133,34 +135,6 @@ const CaractersPage = () => {
             />
           ))}
         </div>
-        {/* <div className="row gx-2 justify-content-center">
-          {characters && characters.map(({
-            id, name, image, status,
-          }) => (
-            <div key={id} className="card__wrapper col-xs-2 col-sm-4 col-lg-3">
-              <div className={
-              `card text-dark mb-3
-              ${(status === 'Alive') ? 'bg-success' : ''}
-              ${(status === 'Dead') ? 'bg-danger' : ''}
-              ${(status === 'unknown') ? 'bg-warning' : ''}`
-}
-              >
-                <img src={image} className="img-thumbnail card-img-top" alt="character" />
-                <div className="card-body character__card-body row">
-                  <h3 className="card-title">{name}</h3>
-                  <p className="card-text">
-                    ID:
-                    {' '}
-                    {id}
-                  </p>
-                  <div className="col align-self-end">
-                    <button onClick={() => navigate(`/characters/${id}`)} className="btn btn-info">Read More</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div> */}
       </InfiniteScroll>
       )}
 

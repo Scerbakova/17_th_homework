@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import EpisodeCard from '../../components/Cards/EpisodeCard';
 import Loader from '../../components/Loader/Loader';
 import { Episode } from '../../Models/EpisodeModel';
 import styles from './EpisodesPage.module.scss';
@@ -9,7 +10,6 @@ import styles from './EpisodesPage.module.scss';
 const EpisodesPage = () => {
   const [episodes, setEpisodes] = useState<Episode[]>();
   const [errorMessage, setErrorMessage] = useState<string>();
-  const navigate = useNavigate();
   const [inputValue, setInputValue] = useState('');
   const [nextPage, setNextPage] = useState<string>();
   const [hasMore, setHasMore] = useState(true);
@@ -110,31 +110,15 @@ const EpisodesPage = () => {
             loader={<h4>Loading...</h4>}
           >
             <div className="row gx-2 justify-content-center">
-              {episodes && episodes.map(({ id, name, episode }) => (
-                <div key={id} className="card__wrapper col-xs-2 col-sm-4 col-lg-3">
-                  <div className="card-subtitle text-warning bg-success mb-3">
-                    <div className="card-body episode__card-body row">
-                      <h2 className="card-title">{name}</h2>
-                      <h3 className="card-subtitle mb-2 text-info">{episode}</h3>
-                      <p className="card-text text-dark">
-                        ID:
-                        {' '}
-                        {id}
-                      </p>
-                      <div className="col align-self-end">
-                        <button
-                          onClick={
-                            () => navigate(`/episodes/${id}`)
-                          }
-                          className="btn btn-danger"
-                        >
-                          Read More
-
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              {episodes && episodes.map(({
+                id, name, episode,
+              }) => (
+                <EpisodeCard
+                  key={id}
+                  id={id}
+                  name={name}
+                  episode={episode}
+                />
               ))}
             </div>
           </InfiniteScroll>
