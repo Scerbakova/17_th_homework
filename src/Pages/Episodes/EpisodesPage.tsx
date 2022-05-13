@@ -85,7 +85,7 @@ const EpisodesPage = () => {
             onSubmit={(e) => {
               e.preventDefault();
               setInputValue('');
-              setSearchParams({ search: `${inputValue}` });
+              setSearchParams({ search: inputValue });
               getEpisodes();
             }}
             className="input__search"

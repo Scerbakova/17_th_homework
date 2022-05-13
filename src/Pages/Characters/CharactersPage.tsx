@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import Card from '../../components/Card/Card';
 import Loader from '../../components/Loader/Loader';
 import { Character } from '../../Models/CharacterModel';
 
@@ -11,7 +12,6 @@ const CaractersPage = () => {
   const [activeFilter, setActiveFilter] = useState<string>('all');
   const [nextPage, setNextPage] = useState<string>();
   const [hasMore, setHasMore] = useState(true);
-  const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -125,6 +125,18 @@ const CaractersPage = () => {
           {characters && characters.map(({
             id, name, image, status,
           }) => (
+            <Card
+              id={id}
+              name={name}
+              image={image}
+              status={status}
+            />
+          ))}
+        </div>
+        {/* <div className="row gx-2 justify-content-center">
+          {characters && characters.map(({
+            id, name, image, status,
+          }) => (
             <div key={id} className="card__wrapper col-xs-2 col-sm-4 col-lg-3">
               <div className={
               `card text-dark mb-3
@@ -148,7 +160,7 @@ const CaractersPage = () => {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
       </InfiniteScroll>
       )}
 
