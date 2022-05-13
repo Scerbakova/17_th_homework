@@ -108,13 +108,13 @@ const LocationPage = () => {
             <div className="col">
               {location.residents.map(
                 (resident) => (
-                  <div key={resident}>
-                    <a
-                      href={resident.replace((resident.slice(0, 42)), '/characters/')}
-                    >
-                      {resident.replace((resident.slice(0, 42)), '/characters/')}
-                    </a>
-                  </div>
+                  <button
+                    key={resident}
+                    className="button button__episode"
+                    onClick={() => navigate(resident.replace((resident.slice(0, 42)), '/characters/'))}
+                  >
+                    {resident.replace((resident.slice(0, 42)), '/characters/')}
+                  </button>
                 ),
               )}
             </div>
@@ -126,9 +126,13 @@ const LocationPage = () => {
               <span className="character">url:</span>
             </div>
             <div className="col">
-              <a href={location.url.replace((location.url.slice(0, 41)), '/locations/')}>
+              <button
+                key={location.url}
+                className="button button__episode"
+                onClick={() => navigate(location.url.replace((location.url.slice(0, 41)), '/locations/'))}
+              >
                 {location.url.replace((location.url.slice(0, 41)), '/locations/')}
-              </a>
+              </button>
             </div>
           </div>
         </div>

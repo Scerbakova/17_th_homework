@@ -10,6 +10,7 @@ const CharacterPage = () => {
   const { id } = useParams();
   const [currentCharacter, setCurrentCharacter] = useState<number>(Number(id));
   const navigate = useNavigate();
+
   const getCharacter = async () => {
     setLoading(true);
     try {
@@ -128,9 +129,14 @@ const CharacterPage = () => {
                   {character.origin.name}
                 </div>
                 <div className="origin">
-                  <a href={character.origin.url.replace((character.origin.url.slice(0, 41)), '/locations/')}>
-                    {character.origin.url.replace((character.origin.url.slice(0, 41)), '/locations/')}
-                  </a>
+                  <button
+                    className="button"
+                    onClick={
+                      () => navigate(character.origin.url.replace((character.origin.url.slice(0, 41)), '/locations/'))
+}
+                  >
+                    { character.origin.url.replace((character.origin.url.slice(0, 41)), '/locations/') }
+                  </button>
                 </div>
               </div>
             </div>
@@ -143,9 +149,16 @@ const CharacterPage = () => {
                   {character.location.name}
                 </div>
                 <div className="location">
-                  <a href={character.location.url.replace((character.location.url.slice(0, 41)), '/locations/')}>
-                    {character.location.url.replace((character.location.url.slice(0, 41)), '/locations/')}
-                  </a>
+                  <button
+                    className="button"
+                    onClick={
+                      () => navigate(character.location.url.replace(
+                        (character.location.url.slice(0, 41)), '/locations/',
+                      ))
+}
+                  >
+                    { character.location.url.replace((character.location.url.slice(0, 41)), '/locations/') }
+                  </button>
                 </div>
               </div>
             </div>
@@ -166,11 +179,13 @@ const CharacterPage = () => {
                 </div>
                 <div className="col">
                   {character.episode.map((link) => (
-                    <div key={link}>
-                      <a href={link.replace((link.slice(0, 40)), '/episodes/')} key={id}>
-                        {link.replace((link.slice(0, 40)), '/episodes/')}
-                      </a>
-                    </div>
+                    <button
+                      key={link}
+                      className="button"
+                      onClick={() => navigate(link.replace((link.slice(0, 40)), '/episodes/'))}
+                    >
+                      {link.replace((link.slice(0, 40)), '/episodes/')}
+                    </button>
                   ))}
                 </div>
               </div>
@@ -182,9 +197,12 @@ const CharacterPage = () => {
                   <span className="character">url:</span>
                 </div>
                 <div className="col">
-                  <a href={character.url.replace((character.url.slice(0, 42)), '/characters/')}>
+                  <button
+                    className="button"
+                    onClick={() => navigate(character.url.replace((character.url.slice(0, 42)), '/episodes/'))}
+                  >
                     {character.url.replace((character.url.slice(0, 42)), '/characters/')}
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>

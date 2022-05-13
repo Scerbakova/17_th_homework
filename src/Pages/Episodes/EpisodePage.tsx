@@ -107,13 +107,13 @@ const EpisodePage = () => {
             <div className="col">
               {episode.characters.map(
                 (character) => (
-                  <div key={character}>
-                    <a
-                      href={character.replace((character.slice(0, 42)), '/characters/')}
-                    >
-                      {character.replace((character.slice(0, 42)), '/characters/')}
-                    </a>
-                  </div>
+                  <button
+                    key={character}
+                    className="button button__episode"
+                    onClick={() => navigate(character.replace((character.slice(0, 42)), '/characters/'))}
+                  >
+                    {character.replace((character.slice(0, 42)), '/characters/')}
+                  </button>
                 ),
               )}
             </div>
@@ -126,9 +126,13 @@ const EpisodePage = () => {
               <span className="character">url:</span>
             </div>
             <div className="col">
-              <a href={episode.url.replace((episode.url.slice(0, 40)), '/episodes/')}>
+              <button
+                key={episode.url}
+                className="button button__episode"
+                onClick={() => navigate(episode.url.replace((episode.url.slice(0, 40)), '/episodes/'))}
+              >
                 {episode.url.replace((episode.url.slice(0, 40)), '/episodes/')}
-              </a>
+              </button>
             </div>
           </div>
         </div>
