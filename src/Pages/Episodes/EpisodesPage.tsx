@@ -91,6 +91,7 @@ const EpisodesPage = () => {
             className="input__search"
           >
             <input
+              className="form-control mr-sm-2"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               type="text"

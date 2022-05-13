@@ -5,6 +5,7 @@
   overflow-y: auto;
 }
 body {
+  background-color: deeppink !important;
   width: 100%;
 }
 .wrapper {
@@ -12,7 +13,8 @@ body {
   font-size: 24px;
   font-weight: 400;
   padding: 30px;
-  width: 100%;
+  margin: 20px;
+  max-width: 100%;
   background-color: rgb(184, 228, 144);
   min-height: 100vh;
   scrollbar-gutter: stable both-edges;
@@ -38,6 +40,12 @@ body {
 }
 #dark .title {
   color:rgb(255, 127, 244)
+}
+.theme__title {
+  color:rgb(114, 49, 109);
+}
+#dark .theme__title {
+  color:rgb(8, 250, 117)
 }
 .card__wrapper {
   margin-bottom: 10px;
@@ -131,7 +139,7 @@ body {
   overflow: hidden !important;
 }
 .button {
-  color: rgb(8, 250, 117);
+  color: rgb(8, 250, 218);
   background-color: inherit;
   border: none;
   margin: 10px;

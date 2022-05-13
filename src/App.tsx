@@ -29,7 +29,9 @@ const App = () => {
           <Router>
             <Header />
             <div className="switch text-center">
+              <span className="theme__title">Light </span>
               <ReactSwitch checked={theme === 'dark'} onChange={toggleTheme} />
+              <span className="theme__title"> Dark </span>
             </div>
             <Routes>
               <Route path="/" element={<HomePage />} />
