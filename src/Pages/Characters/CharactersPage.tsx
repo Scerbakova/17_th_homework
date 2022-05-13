@@ -44,6 +44,7 @@ const CaractersPage = () => {
 
   const getMoreCharacters = async () => {
     setLoading(true);
+
     try {
       if (nextPage) {
         const response = await axios.get(nextPage);
@@ -66,6 +67,7 @@ const CaractersPage = () => {
 
   const fetchData = async () => {
     const moreCharacters = await getMoreCharacters();
+
     if (characters) {
       setCharacters([...characters, ...moreCharacters]);
     }
@@ -113,7 +115,6 @@ const CaractersPage = () => {
         >
           Unknown
         </button>
-
       </div>
       {characters && (
       <InfiniteScroll
@@ -137,7 +138,6 @@ const CaractersPage = () => {
         </div>
       </InfiniteScroll>
       )}
-
       <div>{errorMessage && <span>{errorMessage}</span>}</div>
       {loading && <Loader />}
     </div>

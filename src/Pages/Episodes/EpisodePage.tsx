@@ -10,8 +10,10 @@ const EpisodePage = () => {
   const { id } = useParams();
   const [currentEpisode, setCurrentEpisode] = useState<number>(Number(id));
   const navigate = useNavigate();
+
   const getEpisode = async () => {
     setLoading(true);
+
     try {
       const response = await axios.get(`https://rickandmortyapi.com/api/episode/${currentEpisode}`);
       setEpisode(response.data);
@@ -45,7 +47,6 @@ const EpisodePage = () => {
             className="previous btn btn-primary"
           >
             Previous
-
           </button>
           <h1 className="title">Episode</h1>
           <button
@@ -59,10 +60,8 @@ const EpisodePage = () => {
             className="next btn btn-danger"
           >
             Next
-
           </button>
         </div>
-
         <div className="row episode__row">
           <div className="col">
             <span className="character">name:</span>
@@ -71,7 +70,6 @@ const EpisodePage = () => {
             {episode.name}
           </div>
         </div>
-
         <div className="row episode__row">
           <div className="col">
             <span className="character">id:</span>
@@ -80,7 +78,6 @@ const EpisodePage = () => {
             {episode.id}
           </div>
         </div>
-
         <div className="row episode__row">
           <div className="col">
             <span className="character">air date:</span>
@@ -89,7 +86,6 @@ const EpisodePage = () => {
             {episode.air_date}
           </div>
         </div>
-
         <div className="row episode__row">
           <div className="col">
             <span className="character">episode:</span>
@@ -98,7 +94,6 @@ const EpisodePage = () => {
             {episode.episode}
           </div>
         </div>
-
         <div className="characters">
           <div className="row episode__row">
             <div className="col">
@@ -119,7 +114,6 @@ const EpisodePage = () => {
             </div>
           </div>
         </div>
-
         <div className="url">
           <div className="row episode__row">
             <div className="col">
@@ -136,7 +130,6 @@ const EpisodePage = () => {
             </div>
           </div>
         </div>
-
         <div className="row episode__row">
           <div className="col">
             <span className="character">created:</span>

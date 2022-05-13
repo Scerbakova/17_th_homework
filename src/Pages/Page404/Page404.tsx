@@ -1,8 +1,8 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Page404 = () => {
   const navigate = useNavigate();
+
   return (
     <div className="title page404">
       <h2>Welcome to the page which is never found but always shown</h2>

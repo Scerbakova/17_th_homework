@@ -4,10 +4,12 @@
 :root {
   overflow-y: auto;
 }
+
 body {
   background-color: deeppink !important;
   width: 100%;
 }
+
 .wrapper {
   font-family: "Square Peg", cursive;
   font-size: 24px;
@@ -19,9 +21,11 @@ body {
   min-height: 100vh;
   scrollbar-gutter: stable both-edges;
 }
+
 #dark.wrapper {
   background-color: rgb(36, 39, 34);
 }
+
 .link {
   margin-left: 10px;
   text-decoration: none;
@@ -29,36 +33,47 @@ body {
   text-shadow: 0px 1px blueviolet;
   transition: 0.2s;
 }
+
 .link:hover {
   color: rgb(255, 127, 244);
 }
+
 .link--active {
   color: rgb(114, 49, 109);
 }
+
 .title {
   margin-bottom: 30px;
 }
+
 #dark .title {
   color:rgb(255, 127, 244)
 }
+
 .theme__title {
   color:rgb(114, 49, 109);
 }
+
 #dark .theme__title {
   color:rgb(8, 250, 117)
 }
+
 .card__wrapper {
   margin-bottom: 10px;
 }
+
 .character__card-body {
   min-height: 300px;
 }
+
 .episode__card-body {
   min-height: 400px;
 }
+
 .location__card-body {
   min-height: 300px;
 }
+
 .character__row,
 .episode__row {
   background-color: rgb(221, 236, 154);
@@ -66,17 +81,21 @@ body {
   box-shadow: 0px 2px 10px black;
   padding: 10px;
 }
+
 #dark .episode__row {
   background-color: rgb(53, 38, 63);
   color:rgb(8, 250, 117)
 }
+
 #dark .character__row {
   background-color: rgb(53, 38, 63);
   color:rgb(8, 250, 117)
 }
+
 .character {
   text-shadow: 0px 1px rgb(189, 199, 96);
 }
+
 .character__image {
   display: inline-block;
 }
@@ -90,6 +109,7 @@ body {
     display: none;
   }
 }
+
 .page404 {
   height: 100%;
   display: flex;
@@ -98,12 +118,14 @@ body {
   justify-content: center;
   row-gap: 40px;
 }
+
 .video {
   position: relative;
   overflow: hidden;
   width: 100%;
   padding-top: 56.25%;
 }
+
 .vid {
   position: absolute;
   top: 0;
@@ -113,31 +135,37 @@ body {
   width: 100%;
   height: 100%;
 }
+
 .buttons {
   display: flex;
   justify-content: center;
   gap: 10px;
   margin-bottom: 30px;
 }
+
 .input__search {
   display: flex;
   justify-content: center;
   column-gap: 10px;
   margin-bottom: 30px;
 }
+
 .navigation--inner {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
 }
+
 .previous, .next {
   width: fit-content;
   height: fit-content;
 }
+
 .infinite-scroll-component {
   overflow: hidden !important;
 }
+
 .button {
   color: rgb(8, 250, 218);
   background-color: inherit;
@@ -145,13 +173,16 @@ body {
   margin: 10px;
   transition: 0.3s;
 }
+
 .button__episode {
   margin: 20px;
 }
+
 .button:hover {
   color: rgb(206, 250, 8);
   box-shadow: 0px 0px 10px 5px deeppink;
 }
+
 .button:active {
   color: rgb(8, 202, 250);
 }

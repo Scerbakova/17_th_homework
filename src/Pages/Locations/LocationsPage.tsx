@@ -16,6 +16,7 @@ const LocationsPage = () => {
 
   const getLocations = async () => {
     setLoading(true);
+
     try {
       const response = await axios.get('https://rickandmortyapi.com/api/location');
       setLocations(response.data.results);
@@ -39,6 +40,7 @@ const LocationsPage = () => {
 
   const getMoreLocations = async () => {
     setLoading(true);
+
     try {
       if (nextPage) {
         const response = await axios.get(nextPage);
@@ -61,6 +63,7 @@ const LocationsPage = () => {
 
   const fetchData = async () => {
     const moreLocations = await getMoreLocations();
+
     if (locations) {
       setLocations([...locations, ...moreLocations]);
     }
@@ -92,4 +95,5 @@ const LocationsPage = () => {
     </div>
   );
 };
+
 export default LocationsPage;

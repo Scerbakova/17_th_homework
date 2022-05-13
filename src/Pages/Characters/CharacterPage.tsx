@@ -190,7 +190,6 @@ const CharacterPage = () => {
                 </div>
               </div>
             </div>
-
             <div className="url">
               <div className="row character__row">
                 <div className="col">
@@ -206,7 +205,6 @@ const CharacterPage = () => {
                 </div>
               </div>
             </div>
-
             <div className="row character__row">
               <div className="col">
                 <span className="character">created:</span>
@@ -216,7 +214,6 @@ const CharacterPage = () => {
               </div>
             </div>
           </div>
-
         </div>
       )}
       {loading && <Loader />}

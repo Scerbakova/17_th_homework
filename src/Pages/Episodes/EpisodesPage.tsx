@@ -24,6 +24,7 @@ const EpisodesPage = () => {
     try {
       const response = await axios.get(`https://rickandmortyapi.com/api/episode/${params}`);
       setEpisodes(response.data.results);
+
       if (response.data.info.next === null) {
         setHasMore(false);
       } else {
@@ -49,6 +50,7 @@ const EpisodesPage = () => {
 
   const getMoreEpisodes = async () => {
     setLoading(true);
+
     try {
       if (nextPage) {
         const response = await axios.get(nextPage);
@@ -126,7 +128,6 @@ const EpisodesPage = () => {
           )}
         </div>
       </div>
-
       <div>{errorMessage && <span className={styles.error}>{errorMessage}</span>}</div>
       {loading && <Loader />}
     </div>

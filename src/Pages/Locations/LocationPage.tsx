@@ -11,8 +11,10 @@ const LocationPage = () => {
   const { id } = useParams();
   const [currentLocation, setCurrentLocation] = useState<number>(Number(id));
   const navigate = useNavigate();
+
   const getLocation = async () => {
     setLoading(true);
+
     try {
       const response = await axios.get(`https://rickandmortyapi.com/api/location/${currentLocation}`);
       setLocation(response.data);
@@ -46,7 +48,6 @@ const LocationPage = () => {
             className="previous btn btn-primary"
           >
             Previous
-
           </button>
           <h1 className="title">Location</h1>
           <button
@@ -60,10 +61,8 @@ const LocationPage = () => {
             className="next btn btn-danger"
           >
             Next
-
           </button>
         </div>
-
         <div className="row episode__row">
           <div className="col">
             <span className="character">id:</span>
@@ -72,7 +71,6 @@ const LocationPage = () => {
             {location.id}
           </div>
         </div>
-
         <div className="row episode__row">
           <div className="col">
             <span className="character">name:</span>
@@ -81,7 +79,6 @@ const LocationPage = () => {
             {location.name}
           </div>
         </div>
-
         <div className="row episode__row">
           <div className="col">
             <span className="character">type:</span>
@@ -90,7 +87,6 @@ const LocationPage = () => {
             {location.type}
           </div>
         </div>
-
         <div className="row episode__row">
           <div className="col">
             <span className="character">dimention:</span>
@@ -99,7 +95,6 @@ const LocationPage = () => {
             {location.dimension}
           </div>
         </div>
-
         <div className="characters">
           <div className="row episode__row">
             <div className="col">
@@ -136,7 +131,6 @@ const LocationPage = () => {
             </div>
           </div>
         </div>
-
         <div className="row episode__row">
           <div className="col">
             <span className="character">created:</span>
@@ -151,4 +145,5 @@ const LocationPage = () => {
     </div>
   );
 };
+
 export default LocationPage;

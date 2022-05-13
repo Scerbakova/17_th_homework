@@ -12,10 +12,12 @@ export type Character = {
   url: string,
   created: string,
 }
+
 export type CharacterOrigin = {
   name: string,
   url: string,
 }
+
 export type CharacterLocation = {
   name: string,
   url: string,
