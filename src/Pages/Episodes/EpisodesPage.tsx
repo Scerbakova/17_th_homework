@@ -19,10 +19,9 @@ const EpisodesPage = () => {
   const getEpisodes = async () => {
     setLoading(true);
 
-    const params = `?name=${inputValue}`;
-
     try {
-      const response = await axios.get(`https://rickandmortyapi.com/api/episode/${params}`);
+      console.log(searchParams);
+      const response = await axios.get(`https://rickandmortyapi.com/api/episode/?${searchParams}`);
       setEpisodes(response.data.results);
 
       if (response.data.info.next === null) {
@@ -46,7 +45,7 @@ const EpisodesPage = () => {
   useEffect(() => {
     getEpisodes().then();
     setInputValue('');
-  }, []);
+  }, [searchParams]);
 
   const getMoreEpisodes = async () => {
     setLoading(true);
@@ -87,7 +86,7 @@ const EpisodesPage = () => {
             onSubmit={(e) => {
               e.preventDefault();
               setInputValue('');
-              setSearchParams({ search: inputValue });
+              setSearchParams({ name: inputValue });
               getEpisodes();
             }}
             className="input__search"
