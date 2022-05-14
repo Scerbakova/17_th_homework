@@ -20,7 +20,6 @@ const EpisodesPage = () => {
     setLoading(true);
 
     try {
-      console.log(searchParams);
       const response = await axios.get(`https://rickandmortyapi.com/api/episode/?${searchParams}`);
       setEpisodes(response.data.results);
 

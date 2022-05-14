@@ -9,25 +9,26 @@ import { Character } from '../../Models/CharacterModel';
 const CaractersPage = () => {
   const [characters, setCharacters] = useState<Character[]>();
   const [errorMessage, setErrorMessage] = useState<string>();
-  const [activeFilter, setActiveFilter] = useState<string>('all');
+  const [activeFilter, setActiveFilter] = useState('all');
   const [nextPage, setNextPage] = useState<string>();
   const [hasMore, setHasMore] = useState(true);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const getCharacters = async () => {
     setLoading(true);
-
-    const params = activeFilter === 'all' ? '' : `?status=${activeFilter}`;
+    const params = activeFilter === 'all' ? '' : `?${searchParams}`;
 
     try {
-      const response = await axios.get(`https://rickandmortyapi.com/api/character/${params}`);
-      setCharacters(response.data.results);
+      const { data } = await axios.get(`https://rickandmortyapi.com/api/character/${params}`);
+      const { results, info } = data;
 
-      if (response.data.info.next === null) {
+      setCharacters(results);
+
+      if (info.next === null) {
         setHasMore(false);
       } else {
-        setNextPage(response.data.info.next);
+        setNextPage(info.next);
         setHasMore(true);
       }
     } catch (error) {
@@ -84,7 +85,7 @@ const CaractersPage = () => {
         <button
           onClick={() => {
             setActiveFilter('all');
-            setSearchParams({ search: 'all' });
+            setSearchParams({ status: 'all' });
           }}
           className="btn btn-primary"
         >
@@ -93,7 +94,7 @@ const CaractersPage = () => {
         <button
           onClick={() => {
             setActiveFilter('alive');
-            setSearchParams({ search: 'alive' });
+            setSearchParams({ status: 'alive' });
           }}
           className="btn btn-success"
         >
@@ -101,7 +102,7 @@ const CaractersPage = () => {
         </button>
         <button
           onClick={() => {
-            setActiveFilter('dead'); setSearchParams({ search: 'dead' });
+            setActiveFilter('dead'); setSearchParams({ status: 'dead' });
           }}
           className="btn btn-danger"
         >
@@ -109,7 +110,7 @@ const CaractersPage = () => {
         </button>
         <button
           onClick={() => {
-            setActiveFilter('unknown'); setSearchParams({ search: 'unknown' });
+            setActiveFilter('unknown'); setSearchParams({ status: 'unknown' });
           }}
           className="btn btn-warning"
         >
