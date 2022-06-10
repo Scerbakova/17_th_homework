@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react';
 import {
-  BrowserRouter as Router, Navigate, Route, Routes,
+  HashRouter as Router, Navigate, Route, Routes,
 } from 'react-router-dom';
 import ReactSwitch from 'react-switch';
 import './App.scss';

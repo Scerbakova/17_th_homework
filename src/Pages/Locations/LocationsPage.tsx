@@ -9,7 +9,7 @@ import LocationCard from '../../components/Cards/LocationCard';
 const LocationsPage = () => {
   const [locations, setLocations] = useState<Location[]>();
   const [errorMessage, setErrorMessage] = useState<string>();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
   const [nextPage, setNextPage] = useState<string>();
   const [hasMore, setHasMore] = useState(true);
